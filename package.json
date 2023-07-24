@@ -17,6 +17,11 @@
     "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "styled-components": "^6.0.1",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.4",
+    "@types/scrollreveal": "^0.0.8"
   }
 }

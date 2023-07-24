@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore/lite'
 
+const FIREBASE_API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_KEY as string
+
 const firebaseConfig = {
-  apiKey: "AIzaSyA563HO_UAI04zxuTfC0tViW024wQiCBYg",
+  apiKey: FIREBASE_API_KEY,
   authDomain: "talking-with-characters.firebaseapp.com",
   projectId: "talking-with-characters",
   storageBucket: "talking-with-characters.appspot.com",
