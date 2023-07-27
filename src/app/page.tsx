@@ -1,6 +1,6 @@
 "use client"
 
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 import { CharactersContainer } from '../components/charactersContainer';
 import { Warning } from '../components/warning';
 

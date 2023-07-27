@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from './styles/styledCharacterContainer'
 import { CompletionChat } from '../config/chatGPT'
-import ScrollReveal from 'scrollreveal'
 
 interface CharacterContainerProps {
   key: number,
@@ -17,14 +16,18 @@ interface CharacterContainerProps {
 export function CharacterContainer(props: CharacterContainerProps) {
 
   useEffect(() => {
-    ScrollReveal().reveal(`.${props.direction}`, {
-      duration: 1500,
-      delay: 175,
-      origin: props.direction === 'right' ? 'right' : 'left',
-      distance: '300px',
-      reset: false
-    })
-  }, [])
+    async function animate() {
+      const sr = (await import("scrollreveal")).default;
+      sr().reveal(`.${props.direction}`, {
+        duration: 1500,
+        delay: 175,
+        origin: props.direction === "right" ? "right" : "left",
+        distance: "300px",
+        reset: false,
+      });
+    }
+    animate();
+  }, []);
 
   const loading = "Carregando..."
 
@@ -35,7 +38,7 @@ export function CharacterContainer(props: CharacterContainerProps) {
     setResponse(loading)
     setPrompt('')
     const completion = await CompletionChat(prompt, props.rule)
-    if(completion) {
+    if (completion) {
       setResponse(completion)
     }
   }
@@ -45,7 +48,7 @@ export function CharacterContainer(props: CharacterContainerProps) {
       position={props.direction === 'left' ? 'left' : 'right'}
       className={props.direction}
     >
-      <img src={props.img} alt={props.name}/>
+      <img src={props.img} alt={props.name} />
       <div>
         <h2>{props.name}</h2>
         <textarea
