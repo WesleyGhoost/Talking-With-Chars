@@ -3,30 +3,28 @@
 import React, { useEffect, useState } from 'react'
 import { CharacterContainer } from '../components/characterContainer';
 import { Container } from './styles/styledCharactersContainer';
-import db from '../config/firebase'
-import { collection, getDocs } from 'firebase/firestore/lite';
 import { CharacterTypes } from '../types/characterTypes';
-
+import { charactersInfo } from '../utils/charactersInfos';
 
 export function CharactersContainer() {
 
-  const [character, setCharacter] = useState<CharacterTypes[]>([])
-
-  async function getCharacters() {
-    const charactersCollection = collection(db, "characters")
-    const charactersSnapshot = await getDocs(charactersCollection)
-    const charactersData = charactersSnapshot.docs.map(doc => doc.data())
-    const charactersList = charactersData as CharacterTypes[]
-    setCharacter(charactersList)
-  }
+  const [characterList, setCharacterList] = useState<CharacterTypes[]>([])
 
   useEffect(() => {
-    getCharacters()
+    const newCharacterList = charactersInfo.map(character => {
+      return {
+        ...character,
+        setCharacter: (newCharacter: CharacterTypes) => {
+          setCharacterList(prevState => [...prevState, newCharacter])
+        }
+      }
+    })
+    setCharacterList(newCharacterList)
   }, [])
 
   return (
     <Container>
-      {character.map(item => {
+      {characterList.map(item => {
         return (
           <CharacterContainer
             key={item.id}

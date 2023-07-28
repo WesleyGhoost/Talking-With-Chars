@@ -3,12 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from './styles/styledCharacterContainer'
 import { CompletionChat } from '../config/chatGPT'
+import Image, { StaticImageData } from 'next/image'
 
 interface CharacterContainerProps {
   key: number,
   name: string,
   placeholder: string,
-  img: string,
+  img: StaticImageData,
   direction: string,
   rule: string
 }
@@ -48,7 +49,10 @@ export function CharacterContainer(props: CharacterContainerProps) {
       position={props.direction === 'left' ? 'left' : 'right'}
       className={props.direction}
     >
-      <img src={props.img} alt={props.name} />
+      <Image
+        src={props.img}
+        alt={props.placeholder}
+      />
       <div>
         <h2>{props.name}</h2>
         <textarea
