@@ -1,4 +1,4 @@
-const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
+const OPENAI_API_KEY = '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'
 
 export async function CompletionChat(prompt: string, rule: string) {
 
